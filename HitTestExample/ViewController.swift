@@ -9,10 +9,10 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let viewRed = UIView()
-    let viewBlue = UIView()
-    let viewGreen = UIView()
-    let viewOrange = UIView()
+    let viewRed = Subview()
+    let viewBlue = Subview()
+    let viewGreen = Subview()
+    let viewOrange = Subview()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,12 +56,18 @@ class ViewController: UIViewController {
         ])
         
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTouched(tapGestureRecognizer: ))))
-        viewRed.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTouched(tapGestureRecognizer: ))))
-        viewBlue.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTouched(tapGestureRecognizer: ))))
-        viewGreen.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTouched(tapGestureRecognizer: ))))
-        viewOrange.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTouched(tapGestureRecognizer: ))))
+        viewRed.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewRedTouched(tapGestureRecognizer: ))))
+        viewBlue.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewBlueTouched(tapGestureRecognizer: ))))
+        viewGreen.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewGreenTouched(tapGestureRecognizer: ))))
+        viewOrange.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewOrangeTouched(tapGestureRecognizer: ))))
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //обработка касания в контроллере
+        print("ViewController - Touches Began")
+        super.touchesBegan(touches, with: event)
+    }
+    
     @objc func viewTouched(tapGestureRecognizer: UITapGestureRecognizer) {
         print("gray view touched")     }
     @objc func viewRedTouched(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -74,3 +80,10 @@ class ViewController: UIViewController {
         print("orange view touched")   }
 }
 
+class Subview: UIView {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //обработка касания в сабвью
+        print("Subview - Touches Began")
+        super.touchesBegan(touches, with: event)
+    }
+}
